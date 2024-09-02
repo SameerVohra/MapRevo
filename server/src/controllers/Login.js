@@ -23,7 +23,7 @@ const Login = async(req, res) => {
                     console.log(key);
                     const token = jwt.sign(tokenPayload, key);
                     console.log(token);
-                    return res.status(201).send("Login Successful");
+                    return res.status(201).send({token, user});
                 }
             }
         }

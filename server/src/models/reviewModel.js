@@ -2,7 +2,7 @@ const { mongoose } = require("mongoose");
 
 const reviewSchema = new mongoose.Schema({
     user: String,
-    location: String,
+    location: {long: String, lati: String},
     date: Date,
     review: String,
     stars: Number

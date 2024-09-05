@@ -1,22 +1,24 @@
-const express = require("express")
-require("dotenv").config();
-const mongodb = require("mongodb");
+const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
+require("dotenv").config();
+
 const app = require("./app");
 
 const DB_URI = process.env.MONGODB_URI;
-
 const port = process.env.PORT;
-
-app.use(cors({origin: "*"}));
-
-mongoose.connect(DB_URI).then(()=>{
+mongoose
+  .connect(DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
     console.log("Connected to DB");
-})
-.catch((e)=>{
+  })
+  .catch((e) => {
     console.log(`Error connecting to DB: ${e}`);
-})
+  });
 
-app.listen(port, ()=>{
-    console.log(`Started port: ${port}`)
-})
+app.listen(port, () => {
+  console.log(`Server running on port: ${port}`);
+});

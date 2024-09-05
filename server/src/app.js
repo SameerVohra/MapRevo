@@ -1,16 +1,22 @@
 const express = require("express");
-const {Login, Regsiter, AddReview, GetReviews} = require("./controllers/Controllers");
+const { Login, Register, AddReview, GetReviews } = require("./controllers/Controllers");
 const cors = require("cors");
-const verification = require("./middleware/Verification");
+const Verification = require("./middleware/Verification");
 
 const app = express();
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type,Authorization",
+}));
 
-app.use(cors({origin: "*"}));
+// Express Middleware
 app.use(express.json());
 
-app.post("/login", Login)
-app.post("/register", Regsiter);
-app.post("/review", AddReview, verification);
+// Routes
+app.post("/login", Login);
+app.post("/register", Register);
+app.post("/review", Verification, AddReview);
 app.get("/get-reviews", GetReviews);
 
 module.exports = app;

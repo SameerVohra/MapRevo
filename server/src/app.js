@@ -11,6 +11,6 @@ app.use(express.json());
 app.post("/login", Login)
 app.post("/register", Regsiter);
 app.post("/review", AddReview, verification);
-app.get("/get-reviews", GetReviews, verification);
+app.get("/get-reviews", GetReviews);
 
 module.exports = app;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Rating from '@mui/material/Rating';
+import Rating from "@mui/material/Rating";
 import url from "../assets/backend.json";
 import { useParams } from "react-router";
 import axios from "axios";
@@ -13,18 +13,19 @@ function AddReview() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const long = localStorage.getItem("lng");
-    const lati = localStorage.getItem("lat");
+    const long = parseFloat(localStorage.getItem("lng"));
+    const lati = parseFloat(localStorage.getItem("lat"));
 
-    setLoc({long, lati});
+    setLoc({ long, lati });
     try {
+      console.log(loc);
       const res = await axios.post(
         `${url.url}/review`,
         {
           review,
           stars: rating,
           name: username.username,
-          location: loc
+          location: { long, lati },
         },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -38,27 +39,30 @@ function AddReview() {
     }
   };
 
-
   return (
-    <form className="flex flex-col space-y-4 justify-center iterms-center" onSubmit={handleSubmit}>
+    <form
+      className="flex flex-col space-y-4 p-4 sm:p-6 md:p-8 max-w-md w-full bg-white rounded-lg shadow-md"
+      onSubmit={handleSubmit}
+    >
       <input
         type="text"
         value={review}
         onChange={(e) => setReview(e.target.value)}
         placeholder="Add Review"
-        className="text-xl font-bold py-2 px-4 border border-gray-300 rounded-lg"
+        className="text-base sm:text-lg md:text-xl font-bold py-2 px-3 sm:py-3 sm:px-4 border border-gray-300 rounded-lg w-full"
       />
-      <Rating
-        name="simple-controlled"
-        value={rating}
-        onChange={(event, newValue) => {
-          setRating(newValue)
-        }}
-      />
-
+      <div className="flex justify-center">
+        <Rating
+          name="simple-controlled"
+          value={rating}
+          onChange={(event, newValue) => {
+            setRating(newValue);
+          }}
+        />
+      </div>
       <button
         type="submit"
-        className="py-2 px-4 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600"
+        className="py-2 px-4 sm:py-3 sm:px-6 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600"
       >
         Submit Review
       </button>

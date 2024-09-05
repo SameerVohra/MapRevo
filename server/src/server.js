@@ -8,6 +8,8 @@ const DB_URI = process.env.MONGODB_URI;
 
 const port = process.env.PORT;
 
+app.use(cors({origin: "*"}));
+
 mongoose.connect(DB_URI).then(()=>{
     console.log("Connected to DB");
 })

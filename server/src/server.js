@@ -8,10 +8,7 @@ const app = require("./app");
 const DB_URI = process.env.MONGODB_URI;
 const port = process.env.PORT;
 mongoose
-  .connect(DB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(DB_URI)
   .then(() => {
     console.log("Connected to DB");
   })

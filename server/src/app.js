@@ -4,16 +4,10 @@ const cors = require("cors");
 const Verification = require("./middleware/Verification");
 
 const app = express();
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: "GET,POST,PUT,DELETE",
-  allowedHeaders: "Content-Type,Authorization",
-}));
+app.use(cors({origin: "*"}));
 
-// Express Middleware
 app.use(express.json());
 
-// Routes
 app.post("/login", Login);
 app.post("/register", Register);
 app.post("/review", Verification, AddReview);

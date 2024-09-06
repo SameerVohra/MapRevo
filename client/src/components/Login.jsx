@@ -22,6 +22,8 @@ function Login() {
 
         console.log(res);
         if (res.status === 201) {
+          setUsername("");
+          setPassword("");
           localStorage.setItem("token", res.data.token);
           navigate(`/${username}/home`);
         }
@@ -31,8 +33,7 @@ function Login() {
       }
     };
     loginForm();
-    setUsername("");
-    setPassword("");
+    
   };
 
   return (

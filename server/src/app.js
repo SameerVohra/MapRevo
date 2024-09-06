@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.post("/login", Login);
 app.post("/register", Register);
-app.post("/review", Verification, AddReview);
+app.post("/review", AddReview, Verification);
 app.get("/get-reviews", GetReviews);
 
 module.exports = app;

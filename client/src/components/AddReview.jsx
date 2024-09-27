@@ -34,6 +34,7 @@ function AddReview() {
       console.log(res);
       setReview("");
       setRating(0);
+      window.location.reload();
     } catch (err) {
       console.error("Error submitting review:", err);
     }
